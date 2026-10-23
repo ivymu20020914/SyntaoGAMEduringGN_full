@@ -110,6 +110,8 @@
     @media(min-width:721px) and (max-width:880px){
       .topbar{grid-template-columns:176px 116px minmax(0,1fr) 72px;gap:6px}.brand{padding:9px 10px}.brand b{font-size:14px}.brand-mark{width:34px;height:34px;flex-basis:34px}.stat{padding:8px 7px}.stat-head span:last-child{display:none}.stat strong{font-size:15px}.utility{gap:4px}
     }
+    .close,.schedule-chip button{padding:0;display:grid;place-items:center;line-height:1;text-align:center}
+    @media(max-width:720px) and (orientation:portrait){.plan-month-strip .schedule-chip button{right:4px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:8px;font-size:15px}}
   </style>
 </head>
 <body>
