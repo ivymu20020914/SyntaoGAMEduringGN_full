@@ -111,7 +111,16 @@
       .topbar{grid-template-columns:176px 116px minmax(0,1fr) 72px;gap:6px}.brand{padding:9px 10px}.brand b{font-size:14px}.brand-mark{width:34px;height:34px;flex-basis:34px}.stat{padding:8px 7px}.stat-head span:last-child{display:none}.stat strong{font-size:15px}.utility{gap:4px}
     }
     .close,.schedule-chip button{padding:0;display:grid;place-items:center;line-height:1;text-align:center}
-    @media(max-width:720px) and (orientation:portrait){.plan-month-strip .schedule-chip button{right:4px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:8px;font-size:15px}}
+    @media(max-width:720px) and (orientation:portrait){
+      .plan-month-strip .schedule-chip button{right:4px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:8px;font-size:15px}
+      .modal.plan-mode .modal-head{padding:8px 10px 7px}.modal.plan-mode .modal-title{gap:8px}.modal.plan-mode .modal-title .emblem{width:30px;height:30px;border-radius:9px}.modal.plan-mode .modal-title h2{font-size:15px}.modal.plan-mode .modal-title p{font-size:8px}.modal.plan-mode .close{width:30px;height:30px}
+      .modal.plan-mode .modal-body{flex:1;min-height:0;max-height:none;overflow:hidden;padding:6px 8px}.modal.plan-mode .modal-foot{padding:6px 9px 8px;gap:5px}.modal.plan-mode .modal-foot .hint{font-size:7px;line-height:1.2}.modal.plan-mode .modal-foot button{padding:8px 5px}
+      .modal.plan-mode .plan-shell{height:100%;min-height:0;grid-template-rows:auto minmax(0,1fr) auto;gap:5px}
+      .modal.plan-mode .plan-category-grid{gap:4px}.modal.plan-mode .plan-category-grid .plan-tab{min-height:27px;padding:5px 3px;font-size:8px}
+      .modal.plan-mode .project-bank.compact{min-height:0;padding:6px}.modal.plan-mode .project-bank-head{margin-bottom:4px}.modal.plan-mode .project-bank-head h3{font-size:9px}.modal.plan-mode .project-bank-head span{font-size:7px}
+      .modal.plan-mode .project-bank-list.paged{min-height:0;height:100%;grid-template-rows:repeat(3,minmax(0,1fr));gap:4px;overflow:hidden}.modal.plan-mode .project-bank-list.paged .project-tile{min-height:0;padding:5px 36px 5px 6px}.modal.plan-mode .project-bank-list.paged .project-tile h3{font-size:8px;line-height:1.15;margin-bottom:3px}.modal.plan-mode .project-bank-list.paged .project-meta{font-size:6.5px;line-height:1.25}.modal.plan-mode .project-bank-list.paged .project-buttons{right:4px;bottom:50%;transform:translateY(50%)}.modal.plan-mode .project-bank-list.paged .project-detail{padding:5px 6px;font-size:7px}
+      .modal.plan-mode .plan-month-strip{gap:4px}.modal.plan-mode .plan-month-strip .month-zone{min-height:52px;padding:6px 7px;grid-template-columns:minmax(96px,.68fr) minmax(0,1.32fr);column-gap:6px}.modal.plan-mode .plan-month-strip .month-zone h4{font-size:8px}.modal.plan-mode .plan-month-strip .month-help{font-size:7px;margin-top:2px}.modal.plan-mode .plan-month-strip .empty-slot,.modal.plan-mode .plan-month-strip .schedule-chip{min-height:40px;height:40px;padding-top:5px;padding-bottom:5px}.modal.plan-mode .plan-month-strip .schedule-chip{padding-right:30px}.modal.plan-mode .plan-month-strip .schedule-chip h5{font-size:8px}.modal.plan-mode .plan-month-strip .schedule-chip p{font-size:6px}
+    }
   </style>
 </head>
 <body>
@@ -218,9 +227,9 @@
     const actionCFG=adminConfig.actions||{},dailyEvents=Array.isArray(adminConfig.dailyEvents)?adminConfig.dailyEvents:[],quarterEvents=Array.isArray(adminConfig.events)?adminConfig.events:[],timeSeries=Array.isArray(adminConfig.timeSeries)?adminConfig.timeSeries:[],cgCFG=Array.isArray(adminConfig.cgs)?adminConfig.cgs:[];
     const cgIndex=new Map(cgCFG.filter(x=>x&&x.enabled!==false).map(x=>[`${x.person}_${Number(x.threshold)}`,x]));
     const actionRule=(id,fallback={})=>actionCFG[id]?.enabled===false?fallback:{...fallback,...(actionCFG[id]||{})};
-    const defaultState={dataVersion:'html-v11-credit-debt',playerName:'',introCompleted:false,unlockedCGs:{},year:1,calendarYear:2030,month:3,fund:cfgNum('startFund',520),capacity:cfgNum('startCapacity',120),stress:cfgNum('startStress',20),totalNetProfit:0,totalPaidOut:0,actionsLeft:ruleCFG.freeActionsPerQuarter,relations:{leader:0,zhou:0,lin:0,chen:0,xu:0},quarterPlan:{},projectProgress:{},projectDurations:{},projectCounts:{},completedProjects:{},projectCompletedAt:{},projectCostLocked:{},seenEvents:{},seenDailyEvents:{},evaluationHeardPeriod:'',hires:0,loanBalance:0,loanMonthsLeft:0,projectPressureQuarter:false,savedAt:null,settings:{sound:true,motion:true,scale:100},logs:[
-      {date:'第1年·2030年3月',title:'接任工厂管理工作',text:'完成基础经营盘点。厂区需要在经营稳定与绿色投入之间寻找平衡。'},
-      {date:'第1年·2030年3月',title:'设备巡检记录已归档',text:'空压站存在轻微泄漏迹象，建议纳入下一季度安排。'}]};
+    const defaultState={dataVersion:'html-v12-january-start',playerName:'',introCompleted:false,unlockedCGs:{},year:1,calendarYear:2030,month:1,fund:cfgNum('startFund',520),capacity:cfgNum('startCapacity',120),stress:cfgNum('startStress',20),totalNetProfit:0,totalPaidOut:0,actionsLeft:ruleCFG.freeActionsPerQuarter,relations:{leader:0,zhou:0,lin:0,chen:0,xu:0},quarterPlan:{},projectProgress:{},projectDurations:{},projectCounts:{},completedProjects:{},projectCompletedAt:{},projectCostLocked:{},seenEvents:{},seenDailyEvents:{},evaluationHeardPeriod:'',hires:0,loanBalance:0,loanMonthsLeft:0,projectPressureQuarter:false,savedAt:null,settings:{sound:true,motion:true,scale:100},logs:[
+      {date:'第1年·2030年1月',title:'接任工厂管理工作',text:'完成基础经营盘点。厂区需要在经营稳定与绿色投入之间寻找平衡。'},
+      {date:'第1年·2030年1月',title:'设备巡检记录已归档',text:'空压站存在轻微泄漏迹象，建议纳入第一季度安排。'}]};
     let state=JSON.parse(JSON.stringify(defaultState)); let quarterDraft={}; let selectedPlanProject=''; let planGroup='NB'; let planPage=0; let currentModal=''; let projectDetailReturn='plan'; let pointerDrag=null; let evaluationIndex=0; let reportRevealTimers=[];let introStep=-1;
     const modalLayer=$('#modalLayer'), modalBox=$('#modalBox'), body=$('#modalBody'), foot=$('#modalFoot'),game=$('.game'),evaluationScene=$('#evaluationScene'),introFlow=$('#introFlow'),introContent=$('#introContent');
     function esc(s){return String(s).replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]))}
