@@ -98,6 +98,15 @@ def num(value, fallback=0):
 def optional_num(value):
     if value in ("", None):
         return None
+
+
+def parse_json(value, fallback):
+    if value in ("", None):
+        return fallback
+    try:
+        return json.loads(str(value))
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return fallback
     try:
         return float(value)
     except (TypeError, ValueError):
@@ -143,6 +152,10 @@ def main():
             "weight": num(r.get("出现权重")), "once": yes(r.get("是否一次性")), "text": str(r.get("日志正文", "")),
             "fund": num(r.get("资金变化_万元")), "stress": num(r.get("压力变化")),
             "relationTarget": str(r.get("好感对象ID", "")), "relation": num(r.get("好感变化")), "project": str(r.get("关联项目ID", "")),
+            "eventType": str(r.get("事件类型", "quarter")), "year": int(num(r.get("年份"), 0)),
+            "season": str(r.get("季节", "")), "speakerId": str(r.get("说话人ID", "")),
+            "speaker": str(r.get("说话人", "")), "choices": parse_json(r.get("选项JSON"), []),
+            "missText": str(r.get("未触发文本", "")), "legacyCondition": str(r.get("原版条件", "")),
         })
     time_rows = records(sheets.get("经营时间序列", []), "年月")
     time_series = []
@@ -185,7 +198,7 @@ def main():
     formula_version = next((str(r.get("公式版本")) for r in formula_rows if r.get("公式版本")), "GF-OPERATING-1")
     project_formula_version = next((str(r.get("公式版本")) for r in formula_rows if str(r.get("规则ID", "")) == "F12"), "GF-PROJECT-3")
     event_formula_version = next((str(r.get("公式版本")) for r in formula_rows if str(r.get("规则ID", "")) == "F13"), "GF-EVENT-1")
-    config = {"version": "xlsx-admin-v8", "formulaVersion": formula_version, "projectFormulaVersion": project_formula_version, "eventFormulaVersion": event_formula_version, "params": params, "projects": projects, "actions": actions, "dailyEvents": daily_events, "events": events, "timeSeries": time_series, "cgs": cgs}
+    config = {"version": "xlsx-admin-v9-year-events", "formulaVersion": formula_version, "projectFormulaVersion": project_formula_version, "eventFormulaVersion": event_formula_version, "params": params, "projects": projects, "actions": actions, "dailyEvents": daily_events, "events": events, "timeSeries": time_series, "cgs": cgs}
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text("window.GAME_ADMIN_CONFIG = " + json.dumps(config, ensure_ascii=False, indent=2) + ";\n", encoding="utf-8")
     print(f"已更新：{OUTPUT}")
