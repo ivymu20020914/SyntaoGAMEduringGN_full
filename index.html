@@ -173,7 +173,7 @@
   </main>
   <div class="modal-layer" id="modalLayer" role="dialog" aria-modal="true" aria-hidden="true"><section class="modal" id="modalBox"><header class="modal-head"><div class="modal-title"><span class="emblem" id="modalIcon">◇</span><div><h2 id="modalTitle">标题</h2><p id="modalSub">说明</p></div></div><button class="close" id="closeModal" aria-label="关闭">×</button></header><div class="modal-body" id="modalBody"></div><footer class="modal-foot" id="modalFoot"></footer></section></div>
   <div class="toast" id="toast" role="status"></div>
-  <script src="config/game-config.js?v=11"></script>
+  <script src="config/game-config.js?v=12"></script>
   <script>
   (()=>{
     const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
@@ -219,7 +219,7 @@
     ];
     if(Array.isArray(adminConfig.projects)&&adminConfig.projects.length){
       const configured=new Map(adminConfig.projects.map(p=>[p.id,p]));
-      projectPool.forEach(p=>{const c=configured.get(p.id);if(c)Object.assign(p,{cost:Number(c.cost),months:Number(c.months),max:Number(c.max),repeatable:!!c.repeatable,dynamicCost:!!c.dynamicCost,benefitMode:c.benefitMode||p.benefitMode,knowledge:c.knowledge||p.knowledge||p.desc,impact:c.impact||p.impact||p.result,risk:c.risk||'',impactItems:Array.isArray(c.impactItems)?c.impactItems:[],enabled:c.enabled!==false})});
+      projectPool.forEach(p=>{const c=configured.get(p.id);if(c)Object.assign(p,{name:c.name||p.name,tag:c.tag||p.tag,cat:c.cat||p.cat,cost:Number(c.cost),months:Number(c.months),max:Number(c.max),repeatable:!!c.repeatable,dynamicCost:!!c.dynamicCost,benefitMode:c.benefitMode||p.benefitMode,knowledge:c.knowledge||p.knowledge||p.desc,impact:c.impact||p.impact||p.result,risk:c.risk||'',impactItems:Array.isArray(c.impactItems)?c.impactItems:[],enabled:c.enabled!==false})});
       for(let i=projectPool.length-1;i>=0;i--)if(projectPool[i].enabled===false)projectPool.splice(i,1);
     }
     const chatPeople={
