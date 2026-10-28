@@ -78,6 +78,22 @@
     .toast{position:fixed;z-index:200;left:50%;bottom:102px;transform:translate(-50%,15px);padding:10px 15px;border-radius:12px;background:#294638;color:#fff;box-shadow:0 12px 28px rgba(11,28,19,.3);font-size:12px;opacity:0;pointer-events:none;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
     .kbd{display:inline-block;padding:1px 5px;border:1px solid #c6d0c9;border-bottom-width:2px;border-radius:5px;background:#f7f8f6;font-size:9px;color:#68756f}
     @keyframes fade{from{opacity:0}to{opacity:1}}@keyframes rise{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+    /* Browser zoom reduces the available CSS viewport height. Keep every project title visible
+       instead of vertically centering an over-tall card and clipping its first row. */
+    @media (min-width:721px) and (max-height:800px){
+      .modal.plan-mode{height:calc(100svh - 20px);max-height:none}
+      .modal.plan-mode .modal-head{padding:9px 14px 8px}.modal.plan-mode .modal-title .emblem{width:34px;height:34px}.modal.plan-mode .modal-title h2{font-size:16px}.modal.plan-mode .modal-title p{font-size:9px}.modal.plan-mode .close{width:32px;height:32px}
+      .modal.plan-mode .modal-body{padding:7px 12px}.modal.plan-mode .modal-foot{padding:7px 14px;min-height:48px}
+      .modal.plan-mode .plan-shell{grid-template-rows:auto auto minmax(184px,1fr) auto auto;gap:6px}
+      .modal.plan-mode .plan-guide.compact{padding:5px 9px;font-size:8px}.modal.plan-mode .plan-category-grid .plan-tab{padding:5px 6px}
+      .modal.plan-mode .project-bank.compact{padding:7px 9px}.modal.plan-mode .project-bank-head{margin-bottom:5px}
+      .modal.plan-mode .project-bank-list.paged{grid-template-rows:repeat(3,minmax(50px,1fr));gap:5px}
+      .modal.plan-mode .project-bank-list.paged .project-tile{min-height:50px;padding:6px 8px;align-content:start;overflow:hidden}
+      .modal.plan-mode .project-bank-list.paged .project-tile h3{display:block;min-height:14px;line-height:1.3;color:var(--ink);visibility:visible;opacity:1;margin-bottom:3px}
+      .modal.plan-mode .project-bank-list.paged .project-meta{line-height:1.25}.modal.plan-mode .project-bank-list.paged .project-buttons{align-self:start}
+      .modal.plan-mode .plan-pagination{min-height:20px}.modal.plan-mode .plan-pagination button{padding:3px 8px}
+      .modal.plan-mode .plan-month-strip .month-zone{min-height:82px;padding:8px 10px}.modal.plan-mode .plan-month-strip .empty-slot{min-height:38px;padding:6px}
+    }
     @media(max-width:1050px){.brand{width:174px;min-width:174px}.brand small{display:none}.stats{grid-template-columns:repeat(2,1fr)}.topbar{right:16px}.side-menu{top:174px;width:220px}.character{left:-150px;top:145px;height:clamp(900px,132vh,1160px)}.speech{display:none}.stat{min-height:54px;padding:8px 10px}.stat strong{font-size:15px}.date-card{min-height:54px}.topbar{flex-wrap:wrap}.utility{position:absolute;right:0;top:74px}.menu-btn{min-height:61px}.bottom{left:16px;right:20px}}
     @media(max-width:900px){.planner-layout{grid-template-columns:1fr}.project-bank-list{max-height:210px}.month-zone{min-height:230px}}
     @media(max-width:720px) and (orientation:portrait){
